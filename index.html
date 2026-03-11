@@ -1,62 +1,116 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <title>POPCAT CLASSIC</title>
-        <style>
-          
-            body {
-                margin: 0;
-                font-family: sans-serif; 
-            }
+<head>
+<meta charset="UTF-8">
+<title>POPCAT</title>
 
-            .container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-start;
-                height: 100vh;
-                background-color: #bdaa90;
-              
-                user-select: none;
-                -webkit-user-select: none;
-            }
+<style>
 
-           
-            .title {
-                width: 80%;
-                max-width: 600px; 
-                margin-top: 2em;
-            }
+body{
+margin:0;
+font-family:sans-serif;
+background:#bdaa90;
+user-select:none;
+}
 
-            #p {
-                width: 100%;
-                max-width: 800px; 
-                text-align: center;
-                color: white;
-                font-size: 80px;
-                -webkit-text-stroke: 3px black;
-                
-              
-                flex-grow: 1; 
-                
-             
-                background-image: url('imgs/p.png');
-                background-position: bottom;
-                background-size: contain;
-                background-repeat: no-repeat;
-            }
+.container{
+display:flex;
+flex-direction:column;
+align-items:center;
+height:100vh;
+}
 
-           
-            #op {
-                background-image: url('imgs/op.png');
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <img class="title" src="imgs/popcat.svg" alt="POPCAT">
-            <div class="cat-img" id="p">0</div>
-        </div>
-    </body>
+/* 標題 */
+
+.title{
+width:80%;
+max-width:600px;
+margin-top:30px;
+}
+
+/* 計數 */
+
+#counter{
+font-size:100px;
+color:white;
+-webkit-text-stroke:4px black;
+margin-top:20px;
+}
+
+/* 貓 */
+
+#cat{
+
+width:900px;
+height:600px;
+
+background:url("imgs/p.png") center bottom/contain no-repeat;
+
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img class="title" src="imgs/popcat.svg">
+
+<div id="counter">0</div>
+
+<div id="cat"></div>
+
+</div>
+
+<script>
+
+const cat = document.getElementById("cat")
+const counter = document.getElementById("counter")
+
+let count = 0
+
+function openMouth(){
+cat.style.backgroundImage="url('imgs/op.png')"
+}
+
+function closeMouth(){
+cat.style.backgroundImage="url('imgs/p.png')"
+}
+
+function pop(){
+
+count++
+
+counter.innerText=count
+
+}
+
+/* 滑鼠 */
+
+cat.addEventListener("mousedown",()=>{
+openMouth()
+pop()
+})
+
+cat.addEventListener("mouseup",closeMouth)
+cat.addEventListener("mouseleave",closeMouth)
+
+/* 手機 */
+
+cat.addEventListener("touchstart",(e)=>{
+e.preventDefault()
+openMouth()
+pop()
+})
+
+cat.addEventListener("touchend",closeMouth)
+
+</script>
+
+</body>
 </html>
